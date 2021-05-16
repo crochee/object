@@ -32,6 +32,7 @@ func Context(ctx context.Context) func(*option) {
 }
 
 // Shutdown register app shutdown function
+// you must promise ctx to cancel,otherwise goroutine deadlock
 func Shutdown(f func(ctx context.Context) error) func(*option) {
 	return func(o *option) { o.shutdown = f }
 }
