@@ -2,7 +2,7 @@
 // Author: crochee
 // Date: 2021/5/16
 
-package group
+package routine
 
 import (
 	"context"
@@ -29,7 +29,7 @@ func NewGroup(ctx context.Context) *errGroup {
 }
 
 // Go starts a recoverable goroutine with a context.
-func (e *errGroup) Go(goroutine func(ctx context.Context) error) {
+func (e *errGroup) Go(goroutine func(context.Context) error) {
 	e.waitGroup.Add(1)
 	go func() {
 		var err error
