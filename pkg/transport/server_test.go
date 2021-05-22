@@ -87,7 +87,7 @@ func TestNewApp(t *testing.T) {
 			} else {
 				ctx, cancelFunc = context.WithCancel(context.Background())
 			}
-			s := Shutdown(func(ctx context.Context) error {
+			s := shutdown(func(ctx context.Context) error {
 				time.Sleep(5 * time.Second)
 				cancelFunc()
 				return nil

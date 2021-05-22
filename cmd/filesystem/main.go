@@ -30,6 +30,7 @@ func main() {
 	)
 	if err = app.Run(); err != nil {
 		_, _ = fmt.Fprint(os.Stderr, err)
+		os.Exit(1)
 	}
 	os.Exit(0)
 }
