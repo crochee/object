@@ -1,4 +1,4 @@
-module github.com/crochee/file
+module github.com/crochee/object
 
 go 1.16
 

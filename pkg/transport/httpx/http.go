@@ -10,7 +10,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/crochee/file/pkg/logger"
+	"github.com/crochee/object/pkg/logger"
 )
 
 type option struct {

@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/crochee/file/pkg/transport"
-	"github.com/crochee/file/pkg/transport/httpx"
+	"github.com/crochee/object/pkg/transport"
+	"github.com/crochee/object/pkg/transport/httpx"
 )
 
 func main() {

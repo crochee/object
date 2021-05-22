@@ -11,7 +11,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/crochee/file/pkg/routine"
+	"github.com/crochee/object/pkg/routine"
 )
 
 type AppServer interface {
