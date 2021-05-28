@@ -31,23 +31,20 @@ func RequestLog(log logger.Builder) func(*option) {
 type httpServer struct {
 	*http.Server
 	net.Listener
-	ctx    context.Context
-	cancel context.CancelFunc
+	ctx context.Context
 	option
 }
 
 // New new http AppServer
 func New(ctx context.Context, host string, handler http.Handler, opts ...func(*option)) (*httpServer, error) {
-	newCtx, cancel := context.WithCancel(ctx)
 	srv := &httpServer{
 		Server: &http.Server{
 			Handler: handler,
 			BaseContext: func(_ net.Listener) context.Context {
-				return newCtx
+				return ctx
 			},
 		},
-		ctx:    newCtx,
-		cancel: cancel,
+		ctx: ctx,
 	}
 	for _, opt := range opts {
 		opt(&srv.option)
@@ -73,6 +70,5 @@ func (h *httpServer) Start() error {
 }
 
 func (h *httpServer) Stop() error {
-	go h.cancel() // todo need todo test
 	return h.Shutdown(h.ctx)
 }

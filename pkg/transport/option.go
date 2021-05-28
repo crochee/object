@@ -10,7 +10,7 @@ import (
 )
 
 type option struct {
-	sigList    []os.Signal
+	signals    []os.Signal
 	serverList []AppServer
 	ctx        context.Context
 	shutdown   func(context.Context) error
@@ -18,7 +18,7 @@ type option struct {
 
 // Signal with exit signals.
 func Signal(sigList ...os.Signal) func(*option) {
-	return func(o *option) { o.sigList = sigList }
+	return func(o *option) { o.signals = sigList }
 }
 
 // Servers with transport servers.

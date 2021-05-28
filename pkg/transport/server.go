@@ -28,7 +28,7 @@ type app struct {
 func NewApp(opts ...func(*option)) *app {
 	a := &app{
 		option: option{
-			sigList: []os.Signal{syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT},
+			signals: []os.Signal{syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT},
 			ctx:     context.Background(),
 		},
 	}
@@ -58,7 +58,7 @@ func (a *app) Run() error {
 	} else {
 		g.Go(func(ctx context.Context) error {
 			quit := make(chan os.Signal, 1)
-			signal.Notify(quit, a.option.sigList...)
+			signal.Notify(quit, a.option.signals...)
 			for {
 				select {
 				case <-ctx.Done():
