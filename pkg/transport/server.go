@@ -31,9 +31,7 @@ func NewApp(opts ...func(*option)) *app {
 	for _, opt := range opts {
 		opt(&a.option)
 	}
-	ctx, cancel := context.WithCancel(a.option.ctx)
-	a.ctx = ctx
-	a.cancel = cancel
+	a.ctx, a.cancel = context.WithCancel(a.option.ctx)
 	return a
 }
 
