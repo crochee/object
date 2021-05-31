@@ -49,14 +49,6 @@ func TestGroup_DoMany(t *testing.T) {
 	require.Equal(t, int32(1), atomic.LoadInt32(&calls))
 }
 
-func TestGroup_Do2(t *testing.T) {
-
-	for i := 0; i < 10000; i++ {
-		t.Log(rand.NormFloat64()*float64(2) + 10)
-	}
-
-}
-
 func BenchmarkGroup_Do(b *testing.B) {
 	rand.Seed(time.Now().Unix())
 	g := New()
