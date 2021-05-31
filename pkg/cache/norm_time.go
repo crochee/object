@@ -6,15 +6,20 @@ import (
 	"time"
 )
 
-func init() {
-	rand.Seed(time.Now().Unix())
+type normTime struct {
+	*rand.Rand
+	mean          time.Duration
+	stdDevPercent float64
 }
 
-type NormTime struct {
-	Mean          time.Duration
-	StdDevPercent float64
+func NormTime(mean time.Duration, stdDevPercent float64) *normTime {
+	return &normTime{
+		Rand:          rand.New(rand.NewSource(time.Now().Unix())),
+		mean:          mean,
+		stdDevPercent: stdDevPercent,
+	}
 }
 
-func (n *NormTime) Time() time.Duration {
-	return time.Duration(float64(n.Mean.Nanoseconds())*(100.0+n.StdDevPercent*rand.NormFloat64())/100.0) * time.Nanosecond
+func (n *normTime) Time() time.Duration {
+	return time.Duration(float64(n.mean.Nanoseconds())*(100.0+n.stdDevPercent*n.Rand.NormFloat64())/100.0) * time.Nanosecond
 }
